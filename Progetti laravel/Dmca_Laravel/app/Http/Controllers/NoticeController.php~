@@ -1,0 +1,93 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Providers;
+use App\Http\Templates;
+use App\User;
+use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Support\Facades\Mail;
+use App\Notice;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+
+class NoticesController extends Controller
+{
+    public function __construct()
+    {
+        $this->middleware('auth');
+
+        parent::__construct();
+    }
+
+    public function index()
+    {
+        $notices = $this->user->notices;
+        return view('notices.index', compact('notices'));
+    }
+
+    public function create()
+    {
+
+        $providers = Provider::lists('name', 'id');
+        return view('notices.create', compact('providers'));
+    }
+
+    public function confirm(PrepareNoticeRequest $request)
+    {
+        $template = $this->compileDmcaTemplate($request->all());
+        session()->flash('dmca', $data);
+        return view('notices.confirm', compact('template'));
+    }
+
+    public function store(Request $request)
+    {
+
+        $notice = $this->createNotice($request);
+
+
+        Mail::queue(['text' => 'email.dmca'], compact('notice'), function($message) use ($notice){
+            $message->from($notice->getOwnerEmail())
+                ->to($notice->getRecipientEmail())
+                ->subject('DMCA Notice');
+        });
+
+        flash('Your DMCA notice has been delivered!');
+
+        return redirect('notices');
+    }
+
+    public function update($noticeId, Request $request)
+    {
+
+        $isRemoved = $request->has('content_removed');
+
+        return Notice::findOrFail($noticeId)
+            ->update(['content_removed' => $isRemoved]);
+
+    }
+
+    public function compileDmcaTemplate($data)
+    {
+        $data = $data + [
+                'name' => $this->user->name,
+                'email' => $this->user->email,
+            ];
+        return view()->file(app_path('Http/Template/dmca.blade.php'), $data);
+    }
+
+    /**
+     * @param Request $request
+     */
+    private function createNotice(Request $request)
+    {
+        $notice = session()->get('dmca') + ['template' => $request->input('template')];
+        //$notice = Notice::open($data)->useTemplate($request->input('template'));
+        $notice = $this->user->notices()->create($notice);
+        return $notice;
+    }
+}
+
