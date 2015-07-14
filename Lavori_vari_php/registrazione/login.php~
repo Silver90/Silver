@@ -1,0 +1,20 @@
+<?php
+session_start();
+include("pdo.php");
+$username = $_POST["username"];
+$password = $_POST["password"];
+$connessione->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING );
+$sql = $connessione->prepare("SELECT * FROM anagrafica WHERE username = :username AND password = :password");
+$sql->bindParam(':username', $username);
+$sql->bindParam(':password', $password);
+$sql->execute();
+
+if($row = $sql->fetch()){
+
+    $_SESSION["username"] = $row["username"];
+    $_SESSION["username"] = $row["password"];
+    echo "connessione riuscita! clicca qui per entrare nel "."<a href='pdo.html'>sito</a>";
+}else{
+  echo "login fallito!! Ritenta "."<a href="index.php">clicca qui</a>;
+}
+?>
