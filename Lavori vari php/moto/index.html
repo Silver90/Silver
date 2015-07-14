@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <title>Form moto</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body id="back">
+<nav class="user_search">
+    <form name="searchForm" action="queryselezione.php" method="post">
+        <p class="label">Scegli marca:</p>
+        <select name="marca">
+            <option value="Honda">Honda</option>
+            <option value="Bmw">Bmw</option>
+            <option value="Ducati">Ducati</option>
+            <option value="Kawasaki">Kawasaki</option>
+            <option value="Piaggio">Piaggio</option>
+            <option value="MV Augusta">MV Augusta</option>
+            <option value="Aprilia">Aprilia</option>
+            <option value="Cagiva">Cagiva</option>
+            <option value="Harley-Davidson">Harley-Davidson</option>
+            <option value="Yamaha">Yamaha</option>
+        </select>
+        <input type="text" name="marca" Value="ricerca manuale">
+
+        <p class="label">Scegli modello:</p>
+        <select name="modello">
+            <option value="CBR 600 RR">Cbr 600 RR</option>
+            <option value="MSX 125">MSX 125</option>
+            <option value="R 1200 R">R 1200 R</option>
+            <option value="C Evolution elettrico">C Evolution</option>
+            <option value="1199 Panigale">1199 Panigale</option>
+            <option value="Hypermotard SP">Hypermotard SP</option>
+            <option value="Ninja 636 ZX-6R">Ninja 636</option>
+            <option value="J 300">J 300</option>
+            <option value="Beverly 300i.e.">Beverly 300</option>
+            <option value="NRG Power DT">NRG Power DT</option>
+            <option value="Brutale 675">Brutale 675</option>
+            <option value="F4 1000 RR abs">F4 1000 RR</option>
+            <option value="RSV4 RF abs">RSV4</option>
+            <option value="Dorsoduro 750 abs">Dorsoduro 750</option>
+            <option value="Mito SP 525">Mito SP 525</option>
+            <option value="Raptor 125">Raptor 125</option>
+            <option value="Dyna Low Rider">Dyna</option>
+            <option value="CVO Street Glide">CVO street</option>
+            <option value="FZ8 abs">FZ8</option>
+            <option value="T-Max Iron Max">T-Max</option>
+        </select>
+        <input type="text" name="modello" Value="ricerca manuale">
+
+        <p class="centered" style="WIDTH:170px;">
+            <input class="confirm" type="submit" name="button" value="INIZIA LA RICERCA"/>
+        </p>
+
+    </form>
+</nav>
+<br><br><br><br><br>
+
+<form name="insertform" action="queryinserimento.php" method="post">
+    <p class="label">Inserisci i dati del veicolo:</p>
+    Inserisci la marca: <input type="text" name="marca1"><br>
+    Inserisci la modello: <input type="text" name="modello1"><br>
+    Inserisci la potenza: <input type="text" name="potenza1"><br>
+    Inserisci la cilindrata: <input type="text" name="cilindrata1"><br>
+    Inserisci la peso: <input type="text" name="peso1"><br>
+    Inserisci la altezza sella: <input type="text" name="altezza_sella1"><br>
+    Inserisci la categoria emissione: <input type="text" name="categoria_emissione1"><br>
+    Inserisci la cambio: <input type="text" name="cambio1"><br>
+    Inserisci la tipo cambio: <input type="text" name="tipo_cambio1"><br>
+    Inserisci la consumo: <input type="text" name="consumo1"><br>
+    Inserisci la tipologia: <input type="text" name="tipologia1"><br>
+    Inserisci la prezzo: <input type="text" name="prezzo1"><br>
+
+    <p class="centered" style="WIDTH:170px;">
+        <input class="confirm" type="submit" name="button" value="INSERIMENTO"/>
+    </p>
+</form>
+
+</body>
+</html>

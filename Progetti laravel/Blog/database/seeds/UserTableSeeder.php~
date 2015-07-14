@@ -1,0 +1,35 @@
+<?php
+
+use Illuminate\Database\Seeder;
+use app\User;
+
+class UserTableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        User::create([
+          'first_name' => 'Ignazio',
+          'last_name' => 'Lipari',
+          'slug' => 'ignazio_lipari',
+
+          'email' => 'ignazio.lipari90@libero.it',
+          'password' => \Hash::make('654321')
+
+        ]);
+
+        User::create([
+          'first_name' => 'Ciccio',
+          'last_name' => 'Pasticcio',
+          'slug' => 'ciccio_pasticcio',
+
+          'email' => 'ciccio@gmail.com',
+          'password' => \Hash::make('123456')
+
+        ]);
+    }
+}
