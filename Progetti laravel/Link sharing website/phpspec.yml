@@ -1,5 +1,0 @@
-suites:
-    main:
-        namespace: angleslash
-        psr4_prefix: angleslash
-        src_path: app
